@@ -83,7 +83,7 @@
  ;; Disable backups and autosaves
  make-backup-files nil
  auto-save-default nil
- ;; 4 spaces instead of tabs
+ ;; 4 spaces instead of tabs TODO: Possibly change to 2 spaces
  indent-tabs-mode nil
  tab-width 4
  tab-stop-list (quote (4 8))
@@ -153,6 +153,7 @@
 (defun edit-config()
   (interactive)
   (find-file "~/.emacs.d/init.el"))
+
 (defun reload-config()
   (interactive)
   (load-file "~/.emacs.d/init.el"))
@@ -167,7 +168,7 @@
   (previous-line))
 
 ;; Find file in another window -- TODO: Improve
-(global-set-key (kbd "C-'") 'find-file-other-window)
+;;(global-set-key (kbd "C-'") 'find-file-other-window)
 ;; (defun find-file-other-window ()
 ;;   (interactive)
 ;;   ;;(if (one-window-p nil)
@@ -187,8 +188,8 @@
 (setq-default
  bidi-display-reordering nil
  jit-lock-defer-time nil
- jit-lock-stealth-nice 0.1
- jit-lock-stealth-time 0.2
+ jit-lock-stealth-nice 0 . 1
+ jit-lock-stealth-time 0 . 2
  jit-lock-stealth-verbose nil
  mode-line-default-help-echo nil) ;; Disable mode-line hover tips
 
@@ -233,14 +234,14 @@
 (use-package ivy
   :ensure t
   :hook (after-init . ivy-mode)
-  :bind ("C-x 4 b" . ivy-switch-buffer-other-window)
+  :bind ("C-x 4 b"  . ivy-switch-buffer-other-window)
   :config
   (setq ivy-use-virtual-buffers t
         ivy-count-format "(%d/%d) "
         ivy-display-style 'fancy
         ivy-re-builders-alist
-        '((swiper . ivy--regex-plus)
-          (t      . ivy--regex-fuzzy))
+        '((swiper   . ivy--regex-plus)
+          (t        . ivy--regex-fuzzy))
         ivy-virtual-abbreviate 'full))
 ;; Counsel - Remap Emacs functions to Counsel replacements
 (use-package counsel
@@ -255,21 +256,24 @@
 (use-package swiper
   :ensure t
   :after ivy
-  :bind (("C-s" . swiper)
-         ("C-r" . swiper)))
+  :bind (("C-s"     . swiper)
+         ("C-r"     . swiper)))
 
 ;; Projectile - Project Interaction
 (use-package projectile
   :ensure t
   :defer t
   :hook ((emacs-lisp-mode . projectile-mode)
-         (python-mode     . projectile-mode))
+         (python-mode     . projectile-mode)
+         (html-mode       . projectile-mode)
+         (css-mode        . projectile-mode)
+         (js-mode         . projectile-mode))         
          ;;(rust-mode       . projectile-mode))
   :init
   (setq projectile-keymap-prefix (kbd "C-c p"))
   :config
   (setq projectile-enable-caching t
-        ;; External indexing for Windows.
+        ;; External indexing for Windows . 
         projectile-indexing-method 'alien
         projectile-completion-system 'ivy))
 
@@ -342,12 +346,15 @@
 ;; FlyCheck - Syntax checking
 (use-package flycheck
   :ensure t
-  :bind (("C-\\" . flycheck-list-errors)
-         ("M-["  . flycheck-previous-error)
-         ("M-]"  . flycheck-next-error))
+  :bind (("C-\\"          . flycheck-list-errors)
+         ("M-["           . flycheck-previous-error)
+         ("M-]"           . flycheck-next-error))
   :hook ((emacs-lisp-mode . flycheck-mode)
          (python-mode     . flycheck-mode))
-         ;;(rust-mode       . flycheck-mode))
+         (html-mode       . flycheck-mode)
+         (css-mode        . flycheck-mode)
+         (js-mode         . flycheck-mode))
+         ;;(rust-mode     . flycheck-mode))
   :config
   (setq-default flycheck-checker-error-threshold 400
                 flycheck-disabled-checkers '(emacs-lisp-checkdoc)
@@ -359,21 +366,16 @@
   :defer 1
   :commands company-mode
   :config
-  (setq company-idle-delay 0.1
+  (setq company-idle-delay 0 . 1
         company-minimum-prefix-length 1
         company-tooltip-limit 20)
   (global-company-mode 1))
 
 (use-package company-lsp
-:ensure t
-:init
-(push 'company-lsp company-backends))
-
-;; (use-package company-lsp
-;;   :ensure t
-;;   :after (company lsp-mode)
-;;   :config
-;;   (push 'company-lsp company-backends))
+  :ensure t
+  :after (company lsp-mode)
+  :config
+  (push 'company-lsp company-backends))
 
 ;; NeoTree - Filepath Sidebar
 (use-package neotree
@@ -413,30 +415,30 @@
 (prefer-coding-system 'utf-8)
 (set-default-coding-systems 'utf-8)
 
-;; HTML and CSS
+;; HTML
 (use-package lsp-html
   :ensure t
   :hook (html-mode . lsp-html-enable))
 
+;; CSS
 (use-package lsp-css
   :ensure t
   :hook (css-mode . lsp-css-enable))
 
 ;; PHP
-
 (use-package lsp-php
   :ensure t
   :hook (php-mode . lsp-php-enable))
 
-;; JavaScript TODO: Think about Tern and Company-Tern, skip js2-mode and go straight to js-mode
+;; 
 (use-package js2-mode
   :ensure t
   :init
   (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode)))
-
-(use-package lsp-javascript
-  :ensure t
-  :hook (js2-mode . lsp-javascript-enable))
+;; lsp-javascript isn't a package on MELPA for some reason...
+;; (use-package lsp-javascript
+;;   :ensure t
+;;   :hook (js2-mode . lsp-javascript-enable))
 
 ;; Typescript
 (use-package typescript-mode
@@ -505,4 +507,4 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (lsp-php lsp-css lsp-html lsp-typescript company-auctex lsp-python lsp-javascript-typescript lsp-javascript lsp-ui flx counsel-projectile counsel yasnippet-snippets which-key use-package typescript-mode toxi-theme tern spaceline pyvenv neotree multiple-cursors markdown-mode js2-mode highlight-indentation helm-rg helm-projectile gotham-theme flycheck find-file-in-project doom-themes diminish company-math company-lsp base16-theme auctex anzu))))
+    (lsp-javascript yasnippet-snippets which-key use-package toxi-theme tern spaceline pyvenv neotree multiple-cursors lsp-ui lsp-typescript lsp-python lsp-php lsp-html lsp-css js2-mode highlight-indentation helm-rg helm-projectile gotham-theme flx find-file-in-project doom-themes diminish counsel-projectile company-math company-lsp company-auctex base16-theme anzu))))
