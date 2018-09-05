@@ -267,7 +267,7 @@
          (python-mode     . projectile-mode)
          (html-mode       . projectile-mode)
          (css-mode        . projectile-mode)
-         (js-mode         . projectile-mode))         
+         (js2-mode         . projectile-mode))         
          ;;(rust-mode       . projectile-mode))
   :init
   (setq projectile-keymap-prefix (kbd "C-c p"))
@@ -353,7 +353,7 @@
          (python-mode     . flycheck-mode))
          (html-mode       . flycheck-mode)
          (css-mode        . flycheck-mode)
-         (js-mode         . flycheck-mode))
+         (js2-mode         . flycheck-mode))
          ;;(rust-mode     . flycheck-mode))
   :config
   (setq-default flycheck-checker-error-threshold 400
@@ -430,15 +430,15 @@
   :ensure t
   :hook (php-mode . lsp-php-enable))
 
-;; 
+;; Javascript
 (use-package js2-mode
   :ensure t
   :init
   (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode)))
-;; lsp-javascript isn't a package on MELPA for some reason...
-;; (use-package lsp-javascript
-;;   :ensure t
-;;   :hook (js2-mode . lsp-javascript-enable))
+
+(use-package lsp-javascript-typescript
+  :ensure t
+  :hook (js2-mode . lsp-javascript-typescript-enable))
 
 ;; Typescript
 (use-package typescript-mode
