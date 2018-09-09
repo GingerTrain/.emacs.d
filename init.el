@@ -188,8 +188,8 @@
 (setq-default
  bidi-display-reordering nil
  jit-lock-defer-time nil
- jit-lock-stealth-nice 0 . 1
- jit-lock-stealth-time 0 . 2
+ jit-lock-stealth-nice 0.1
+ jit-lock-stealth-time 0.2
  jit-lock-stealth-verbose nil
  mode-line-default-help-echo nil) ;; Disable mode-line hover tips
 
@@ -350,7 +350,7 @@
          ("M-["           . flycheck-previous-error)
          ("M-]"           . flycheck-next-error))
   :hook ((emacs-lisp-mode . flycheck-mode)
-         (python-mode     . flycheck-mode))
+         (python-mode     . flycheck-mode)
          (html-mode       . flycheck-mode)
          (css-mode        . flycheck-mode)
          (js2-mode         . flycheck-mode))
@@ -366,7 +366,7 @@
   :defer 1
   :commands company-mode
   :config
-  (setq company-idle-delay 0 . 1
+  (setq company-idle-delay 0.1
         company-minimum-prefix-length 1
         company-tooltip-limit 20)
   (global-company-mode 1))
@@ -440,7 +440,7 @@
   :ensure t
   :hook (js2-mode . lsp-javascript-typescript-enable))
 
-;; Typescript
+;; Typescript - Look into Tide
 (use-package typescript-mode
   :ensure t
   :init
