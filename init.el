@@ -13,7 +13,7 @@
 ;; Which Key
 ;; Powerline
 ;; NeoTree
-  ;; All The Icons
+;; All The Icons
 
 
 ;;;;;;;;;;;;;;;;;;;;;;
@@ -24,6 +24,8 @@
 ;; Better organization and readability
 ;; More customization
 ;; Cleanup and decrease size
+;; Fix scrolling lag, could be caused by spaceline
+;; Disabling linum-mode fixed the lag, but I want linum-mode so I need to find an alternative
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;
@@ -52,6 +54,10 @@
 ;; Disable newline automatically added at end of file
 (setq mode-require-final-newline nil)
 
+;; "Smooth scrolling"
+;;(setq mouse-wheel-scroll-amount '(1 ((shift) . 1)))
+(setq mouse-wheel-follow-mouse 't)
+
 ;; Parentheses
 (setq show-paren-delay 0)
 (show-paren-mode  1)
@@ -67,15 +73,14 @@
 ;;(tool-bar-mode   -1)
 ;;(tooltip-mode    -1)
 ;;(menu-bar-mode   -1)
-(global-linum-mode t)
-(setq linum-format " %d ") ;; Fix clipping issue
+;;(global-linum-mode t) ;; !WARNING: CAUSES MASSIVE LAG WHEN SCROLLING!
+;;(setq linum-format " %d ") ;; Fix clipping issue
 (set-face-attribute 'default nil
   :family "Iosevka"
   :height 120)
 ;;(blink-cursor-mode 0)
 (set-default 'cursor-type 'box)
 (global-hl-line-mode t)
-
 
 (setq-default
  ring-bell-function 'ignore
@@ -100,10 +105,6 @@
 
 ;; https://gist.github.com/huytd/6b785bdaeb595401d69adc7797e5c22c
 (custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :background "#212121" :foreground "#eeffff" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 110 :width normal :foundry "nil" :family "Iosevka"))))
  '(font-lock-constant-face ((t (:foreground "#C792EA"))))
  '(font-lock-keyword-face ((t (:foreground "#2BA3FF" :slant italic))))
@@ -500,11 +501,3 @@
 ;;;;;;;;;;;;;;;;;;;;;;
 ;;   Do Not Touch   ;;
 ;;;;;;;;;;;;;;;;;;;;;;
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (lsp-javascript yasnippet-snippets which-key use-package toxi-theme tern spaceline pyvenv neotree multiple-cursors lsp-ui lsp-typescript lsp-python lsp-php lsp-html lsp-css js2-mode highlight-indentation helm-rg helm-projectile gotham-theme flx find-file-in-project doom-themes diminish counsel-projectile company-math company-lsp company-auctex base16-theme anzu))))
