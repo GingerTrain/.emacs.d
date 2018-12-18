@@ -1,4 +1,4 @@
 # .emacs.d
-My .emacs.d setup
+My emacs setup
 
 ## This repo is mirrored from GitLab
