@@ -19,6 +19,7 @@ eclipse.jdt.ls/
 workspace/
 
 # Files
+challenger-deep-theme.el
 bookmarks
 custom.el
 recentf
