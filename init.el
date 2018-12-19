@@ -1,4 +1,3 @@
-
 ;;;;;;;;;;;;;;;;;;;;;;;
 ;;  Packages I Want  ;;
 ;;;;;;;;;;;;;;;;;;;;;;;
@@ -24,8 +23,6 @@
 ;; Better organization and readability
 ;; More customization
 ;; Cleanup and decrease size
-;; Fix scrolling lag, could be caused by spaceline
-;; Disabling linum-mode fixed the lag, but I want linum-mode so I need to find an alternative
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;
@@ -73,8 +70,8 @@
 ;;(tool-bar-mode   -1)
 ;;(tooltip-mode    -1)
 ;;(menu-bar-mode   -1)
-;;(global-linum-mode t) ;; !WARNING: CAUSES MASSIVE LAG WHEN SCROLLING!
-;;(setq linum-format " %d ") ;; Fix clipping issue
+;;(setq linum-format " %d ") ;; Fix clipping issue with linum mode
+(global-display-line-numbers-mode) ;; Credit: https://github.com/aclonegeek
 (set-face-attribute 'default nil
   :family "Iosevka"
   :height 120)
@@ -97,7 +94,11 @@
  split-width-threshold 0
  split-height-threshold nil)
 
-;; Theme
+
+;;;;;;;;;;;;;;;;;;;;;;;
+;;       Theme       ;;
+;;;;;;;;;;;;;;;;;;;;;;;
+
 (use-package doom-themes
   :ensure t
   :config
@@ -244,6 +245,7 @@
         '((swiper   . ivy--regex-plus)
           (t        . ivy--regex-fuzzy))
         ivy-virtual-abbreviate 'full))
+
 ;; Counsel - Remap Emacs functions to Counsel replacements
 (use-package counsel
   :ensure t
@@ -253,6 +255,7 @@
          ("C-x C-r" . counsel-recentf))
   :config
   (setq counsel-find-file-ignore-regexp "^\\.\\|~$\\|^#\\|\\.elc\\|\\.pyc\\|__pycache__"))
+
 ;; Swiper - Ivy alternative to isearch
 (use-package swiper
   :ensure t
