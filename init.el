@@ -155,7 +155,6 @@
 (defun edit-config()
   (interactive)
   (find-file "~/.emacs.d/init.el"))
-
 (defun reload-config()
   (interactive)
   (load-file "~/.emacs.d/init.el"))
@@ -186,6 +185,18 @@
 ;;;;;;;;;;;;;;;;;;;;;;;
 ;;   Optimizations   ;;
 ;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Speedier startup
+(defvar file-name-handler-alist-old file-name-handler-alist)
+(setq file-name-handler-alist nil
+      gc-cons-threshold       402653184
+      gc-cons-percentage      0.6)
+
+(add-hook 'after-init-hook (lambda ()
+                             (setq file-name-handler-alist file-name-handler-alist-old
+                                   gc-cons-threshold 800000
+                                   gc-cons-percentage 0.1)))
+(add-hook 'focus-out-hook 'garbage-collect)
 
 (setq-default
  bidi-display-reordering nil
@@ -222,6 +233,15 @@
 ;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; OrgMode Configs
+(use-package org
+  :defer t
+  :config
+  (unbind-key "C-k" org-mode-map)
+  (unbind-key "C-x n e" org-mode-map)
+  ;; Wrap lines in org-mode
+  (setq org-startup-truncated nil
+        org-pretty-entities t))
+
 (setq org-html-validation-link nil)
 (setq org-todo-keywords
       '((sequence "TODO" "WORKING" "HOLD" "|" "DONE" "FIXME")))
@@ -327,14 +347,27 @@
 ;; LSP - Language Server Protocal library
 (use-package lsp-mode
   :ensure t
-  :defer t)
+  :defer t
+  :commands lsp
+  :config
+  (require 'lsp-clients))
 
 (use-package lsp-imenu
   :hook (lsp-after-open . lsp-enable-imenu))
 
 (use-package lsp-ui
   :ensure t
-  :hook (lsp-mode . lsp-ui-mode))
+  :after lsp-mode
+  :hook (lsp . lsp-ui-mode))
+
+(use-package company-lsp
+  :ensure t
+  :after (company lsp-mode)
+  :config
+  (push 'company-lsp company-backends)
+
+  (setq company-lsp-cache-candidates t
+        company-lsp-enable-snippet t))
 
 ;; Yasnippet - Template system (abbreviation into function template)
 (use-package yasnippet
@@ -457,7 +490,7 @@
 ;; Python
 (setq-default python-shell-interpreter "python3"
               python-indent-offset 4
-              python-indent-guess-indent-offset nil)
+              python-indent-guess-indent-offset nil
               ;; TODO: Make this crossplatform.
               ;;flycheck-flake8rc "C:/Users/Eric/.flake8")
 
