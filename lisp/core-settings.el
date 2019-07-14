@@ -5,7 +5,7 @@
     (setq default-directory (expand-file-name (getenv "UserProfile"))))
 
 (setq inhibit-startup-screen t
-      initial-scratch-message "")
+      initial-scratch-message "") ;; TODO: Display something
 
 (fset 'yes-or-no-p 'y-or-n-p)
 
