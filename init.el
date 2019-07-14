@@ -1,5 +1,23 @@
 ;; -*- lexical-binding: t; -*-
 
+;;;;;;;;;;;;;;;;;;;;;;;
+;;     Packages      ;;
+;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Which Key
+;; Powerline
+;; NeoTree
+;; All The Icons
+
+;;;;;;;;;;;;;;;;;;;;;;
+;;       TODO       ;;
+;;;;;;;;;;;;;;;;;;;;;;
+
+;; Improve language supports section
+;; Better organization and readability
+;; Add sidebar line number (inline)
+;; Fun start screen
+
 ;; Speedier startup.
 (defvar file-name-handler-alist-old file-name-handler-alist)
 (setq file-name-handler-alist nil
@@ -49,9 +67,10 @@
 (require 'core-ui)
 (require 'core-util)
 
-;; Lang.
-(require 'lang-lsp)
+;; Languages.
 (require 'lang-c) ;; Not used
+(require 'lang-latex)
+(require 'lang-lsp)
 (require 'lang-markdown)
 (require 'lang-org)
 (require 'lang-python)
