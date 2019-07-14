@@ -59,4 +59,9 @@
   (interactive)
   (find-file (concat user-emacs-directory "init.el")))
 
+(defun reload-config()
+  "Reload Emacs config."
+  (interactive)
+  (load-file (concat user-emacs-directory "init.el"))) ;; user-init-file ???
+
 (provide 'core-util)
