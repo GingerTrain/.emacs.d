@@ -5,7 +5,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Which Key
-;; Powerline
+
+;; nlinum
 ;; NeoTree
 ;; All The Icons
 
@@ -13,9 +14,19 @@
 ;;       TODO       ;;
 ;;;;;;;;;;;;;;;;;;;;;;
 
-;; Improve language supports section
-;; Better organization and readability
-;; Add sidebar line number (inline)
+;; Improve language support sections
+  ;; HTML & CSS
+  ;; JavaScript & TypeScript
+    ;; Node, React, etc.
+  ;; C#
+    ;; ASP.NET
+  ;; PHP
+  ;; Shell & Bash
+;; Sidebar line numbering (nlinum)
+  ;; Git diff in gutter (doom-emacs)
+;; Tab emulation (doom-emacs)
+;; File navigator (NeoTree & All The Icons)
+;; Customize modeline (doom-emacs, powerline)
 ;; Fun start screen
 
 ;; Speedier startup.
