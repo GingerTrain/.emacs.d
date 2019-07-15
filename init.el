@@ -22,7 +22,7 @@
     ;; ASP.NET
   ;; PHP
   ;; Shell & Bash
-;; Sidebar line numbering (nlinum)
+;; Sidebar line numbering (global-display-line-numbers-mode)
   ;; Git diff in gutter (doom-emacs)
 ;; Tab emulation (doom-emacs)
 ;; File navigator (NeoTree & All The Icons)

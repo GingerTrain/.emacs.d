@@ -14,6 +14,9 @@
 (setq-default
  mode-line-default-help-echo nil) ;; Disable mode-line hover tips
 
+(when (version<= "26.0.50" emacs-version ) ;; Enable line numbers
+      (global-display-line-numbers-mode ))
+
 ;; Font
 (set-face-attribute 'default nil
                     :family "Iosevka"
