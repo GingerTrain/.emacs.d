@@ -11,4 +11,7 @@
   :ensure t
   :hook (python-mode . lsp))
 
+(use-package jinja2-mode
+:mode "\\.j2\\'")
+
 (provide 'lang-python)
