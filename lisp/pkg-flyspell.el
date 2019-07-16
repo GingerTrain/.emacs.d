@@ -2,7 +2,9 @@
 
 (use-package flyspell
   :ensure t
-  :hook (org-mode . flyspell-mode)
+  :hook
+  (org-mode . flyspell-mode)
+  (markdown-mode . flyspell-mode)
   :config
   (setq ispell-program-name "aspell"
         ispell-dictionary   "english"))
