@@ -2,7 +2,7 @@
 
 Emacs 27 built from source.
 
-## Installation
+## Installation (Linux)
 ``` shell
 ./autogen.sh
 
