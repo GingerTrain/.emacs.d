@@ -16,7 +16,7 @@
 
 (use-package json
   :ensure json-mode
-  :mode (("\\.json" . json-mode))
+  :mode (("\\.json" . json-mode)
          ("\\.eslintrc$" . json-mode))
   :config
   (add-hook 'json-mode-hook
