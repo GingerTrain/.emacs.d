@@ -19,6 +19,8 @@ backups/
 eclipse.jdt.ls/
 workspace/
 
+windows/
+
 # Files
 bookmarks
 custom.el
