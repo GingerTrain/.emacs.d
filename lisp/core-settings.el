@@ -5,9 +5,11 @@
     (setq default-directory (expand-file-name (getenv "UserProfile"))))
 
 (setq inhibit-startup-screen t
-      initial-scratch-message "") ;; TODO: Display something
+      initial-scratch-message (format ";; Scratch buffer - started on %s\n\n" (current-time-string))) ;; TODO: Display something
 
 (fset 'yes-or-no-p 'y-or-n-p)
+;;(setq confirm-kill-emacs 'yes-or-no-p)
+;;(setq vc-follow-symlinks t) ;; Follow symlinks in version controlled repositories if any
 
 ;; Coding systems.
 (prefer-coding-system 'utf-8)
