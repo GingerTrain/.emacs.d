@@ -8,7 +8,8 @@
   (setq projectile-enable-caching    t
         projectile-indexing-method   'alien
         projectile-completion-system 'ivy
-        projectile-generic-command   "fd . -0")
+        projectile-generic-command   "fd . -0"
+        projectile-switch-project-action 'neotree-projectile-action)
   (add-to-list 'projectile-globally-ignored-directories ".ccls-cache"))
 
 (use-package counsel-projectile
