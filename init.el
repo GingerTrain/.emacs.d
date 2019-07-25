@@ -4,9 +4,8 @@
 ;;     Packages      ;;
 ;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Which Key
+;; Which Key - Maybe
 
-;; nlinum
 ;; NeoTree
 ;; All The Icons
 
@@ -17,13 +16,16 @@
 ;; Improve language support sections
   ;; HTML & CSS
   ;; JavaScript & TypeScript
-    ;; Node, React, etc.
+    ;; JSON, Node, React, etc.
   ;; C#
     ;; ASP.NET
   ;; PHP
+  ;; SQL
   ;; Shell & Bash
-;; Sidebar line numbering (global-display-line-numbers-mode)
-  ;; Git diff in gutter (doom-emacs)
+  ;; Git
+  ;; Docker
+;; Windows OS support
+;; Git diff in gutter (doom-emacs)
 ;; Tab emulation (doom-emacs)
 ;; File navigator (NeoTree & All The Icons)
 ;; Customize modeline (doom-emacs, powerline)
@@ -70,6 +72,7 @@
   (unless (package-installed-p 'use-package)
     (package-refresh-contents)
     (package-install 'use-package))
+;;    (setq use-package-always-ensure t)) ;; Global :ensure
   (require 'use-package))
 
 ;; Core.
@@ -79,15 +82,17 @@
 (require 'core-util)
 
 ;; Languages.
-(require 'lang-c) ;; Not used
+(require 'lang-c)
+(require 'lang-javascript)
 (require 'lang-latex)
 (require 'lang-lsp)
 (require 'lang-markdown)
 (require 'lang-org)
 (require 'lang-python)
-(require 'lang-rust) ;; Not used
+;;(require 'lang-rust)
 
 ;; Packages.
+(require 'pkg-all-the-icons)
 (require 'pkg-avy)
 (require 'pkg-ace-window)
 (require 'pkg-company)
@@ -98,6 +103,7 @@
 (require 'pkg-ivy)
 (require 'pkg-magit)
 (require 'pkg-multiple-cursors)
+(require 'pkg-neotree)
 (require 'pkg-projectile)
 (require 'pkg-yasnippet)
 
