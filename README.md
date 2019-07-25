@@ -1,8 +1,10 @@
 # .emacs.d
 
-Emacs 27 built from source.
+This is where I practice my Emacs-Fu
 
 ## Installation (Linux)
+Emacs 27 built from source.
+
 ``` shell
 ./autogen.sh
 
