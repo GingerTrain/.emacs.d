@@ -20,6 +20,8 @@
 (global-set-key (kbd "C-c n") 'rename-file-and-buffer)
 (global-set-key (kbd "C-c i") 'imenu)
 
+;;(global-set-key (kbd "C-c y") 'yank-filename)
+
 ;; Open respective .h/.c(c/pp) file
 ;; (global-set-key (kbd "C-;") 'ff-find-other-file)
 ;; (global-set-key (kbd "C-'") 'find-other-file-other-window)
